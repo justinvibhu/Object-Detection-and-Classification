@@ -4,23 +4,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-
+#Configuration file
 config_file = 'Dataset/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
 data_set = 'Dataset/frozen_inference_graph.pb'
 # data_set1 ='resnet50_coco_best_v2.1.0.h5'
+
+# Algorithm DNN using for train model 
 model = cv2.dnn_DetectionModel(data_set, config_file)
 
+#labels files 
 classlabals = []
 file_name = "Dataset/Labels.txt"
 with open(file_name, 'rt') as fpt:
     classlabals = fpt.read().rstrip('\n').split('\n')
 
+#model scale configuration
 model.setInputSize(320, 320)
 model.setInputScale(1.0/127.5)
 model.setInputMean((127.5, 127.5, 127.5))
 model.setInputSwapRB(True)
 
 
+#function 
 def ImageDetect(input_image):
 
     font_scale = 3
@@ -37,6 +42,8 @@ def ImageDetect(input_image):
     return image_put
 
 
+
+#title bar
 st.title("Object Detection App")
 st.write("Input Image")
 
@@ -53,11 +60,17 @@ else:
     input_img = Image.open(file_img)
     input_img = np.array(input_img)
     classIndex, confidece, bbox = model.detect((input_img), confThreshold=0.5)
-    final_output = ImageDetect(input_img)
+    
+    #function call 
+    final_output = ImageDetect(input_img) 
+    #output image
     st.write("Output image ")
     st.image(final_output, width=500)
-    for i in classIndex:
-        st.write()
+    
+    
+    
+#     for i in classIndex:
+#         st.write()
 
     # img = cv2.imread(file_img)
 
