@@ -1,4 +1,4 @@
-python==3.0
+python>=3.0
 streamlit==0.81.1
 Numpy==1.20.2
 Pillow==8.2.0
