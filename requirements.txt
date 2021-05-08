@@ -4,4 +4,4 @@ python<=3.5.10
 streamlit<=0.81.1
 Numpy<=1.20.2
 Pillow<=8.2.0
-OpenCV<=4.5.2
+opencv-python==3.2.0.8
